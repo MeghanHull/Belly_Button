@@ -135,5 +135,49 @@ function buildCharts(sampleID2) {
     };
     // - Plot the bubble chart 
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
+    //D3. Create gauge
+    // - Find the washing frequency
+    var allMetadata = data.metadata.filter(sampleObj => sampleObj.id == sampleID2);
+    var washFreq = +allMetadata[0].wfreq;
+    // - Create gauge trace
+    var gaugeData = [{
+      type: "indicator",
+      mode: "gauge+number",
+      value: washFreq,
+      title: {text: "<b>Belly Button Washing Frequency</b><br>Scrubs per week"},
+      gauge: {
+        axis: {
+          range: [null,10],
+          tickmode: "array",
+          tickvals: [0,2,4,6,8,10],
+          ticktext: [0,2,4,6,8,10]
+        },
+        bar: {color: "black"},
+        steps: [
+          {range: [0,2], color: 'red'},
+          {range: [2,4], color: 'orange'},
+          {range: [4,6], color: 'yellow'},
+          {range: [6,8], color: 'lime'},
+          {range: [8,10], color: 'green'}
+        ]
+      }
+    }];
+    // - Create gauge layout
+    var gaugeLayout = { 
+      autosize: true,
+      // annotations: [{
+      //   xref: 'paper',
+      //   yref: 'paper',
+      //   x: 0.5,
+      //   xanchor: 'center',
+      //   y: 0,
+      //   yanchor: 'center',
+      //   text: "The gauge displays your belly button weekly washing frequency",
+      //   showarrow: false
+      // }]
+    };
+    // - Plot gauge
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
   });
 }
