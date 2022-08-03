@@ -116,9 +116,9 @@ function buildCharts(sampleID2) {
         yref: 'paper',
         x: 0.5,
         xanchor: 'center',
-        y: 0,
+        y: -0.5,
         yanchor: 'center',
-        text: "The 10 most numerous bacterial species (OTUs) from the participant's belly button",
+        text: "The 10 most numerous bacterial species (OTUs)<br>from the participant's belly button",
         showarrow: false
       }]
     };
