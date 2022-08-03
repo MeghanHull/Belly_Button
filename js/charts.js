@@ -1,11 +1,14 @@
 // RICE-VIRT-DATA-PT-05-2022-U-B-MW Module 12 Challenge
 // ----------------------------------------------------------------------------------------------------------
+// Purpose  : Dynamicly build table and charts from JS data file
+// Created  : 2022 Aug 02 19:49:12 UTC (Meghan E. Hull)
+// Modified : 2022 Aug 03 01:51:25 UTC (Meghan E. Hull)
+// ----------------------------------------------------------------------------------------------------------// 1. Reads data from "samples.json"
 // 1. Reads data from "samples.json"
-// 2. Need to open GitBash & enter:
+// 2. For local QA, need to open GitBash & enter:
 //      python -m http.server
 //    When reading an external data file such as a CSV or JSON file into a script, you must run a server. 
-//    You cannot directly open index.html with your browser
-//    REFERENCE : Module 12.3.2
+//    You cannot directly open index.html with your browser.
 // ----------------------------------------------------------------------------------------------------------
 // Confirm JS is called
 console.log('charts.js loaded')
@@ -53,7 +56,7 @@ function optionChanged(newSampleID) {
 }
 function buildMetadata(sampleID) {
 // Purpose: Build Demographics Panel 
-  // Call data from samples.json
+  // Call data from input json
   d3.json(inputJSON).then((data) => {
     // Save metadata for all participants
     var metadata = data.metadata;
@@ -71,52 +74,66 @@ function buildMetadata(sampleID) {
     });
   });
 }
-// 1. Create the buildCharts function.
 function buildCharts(sampleID2) {
-  // 2. Use d3.json to load and retrieve the samples.json file 
+// Purpose: Builds charts "bar" and "bubble"
+  // Call data from input json 
   d3.json(inputJSON).then((data) => {
-    // 3. Create a variable that holds the samples array.
+    // D0. Search for selected participant data 
+    // - Save samples array for all participants
     var allSamples = data.samples;
-    // 4. Create a variable that filters the samples for the object with the desired sample number.
+    // - Find samples for selected participant ID
     var sampleArray = allSamples.filter(sampleObj => sampleObj.id == sampleID2);
-    //  5. Create a variable that holds the first sample in the array.
     var firstSample = sampleArray[0];
     console.log(firstSample)
-    
-    // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+    // - Save the otu_ids, otu_labels, and sample_values.
     var otuIds = firstSample.otu_ids;
     var otuLabels = firstSample.otu_labels;
     var sampleValues = firstSample.sample_values;
-    console.log(otuIds) 
-    console.log(otuLabels)
-    console.log("sampleValues:")
-    console.log(sampleValues)
 
-    // 7. Create the yticks for the bar chart.
-    // Hint: Get the the top 10 otu_ids and map them in descending order  
-    //  so the otu_ids with the most bacteria are last. 
-    var yticks = otuIds.slice(0,10).map(id => "OTU " + id).reverse();
-    console.log("yticks:")
-    console.log(yticks)
-    
-    // 8. Create the trace for the bar chart.
-    var sampleTopValues = sampleValues.slice(0,10).reverse();
-    var sampleTopLabels = otuLabels.slice(0,10).reverse(); 
+    // D1. Create bar chart
+    // - Slice top 10 bacteria for bar chart
+    var noBarPlot = 10
+    var sampleTopValues = sampleValues.slice(0,noBarPlot).reverse();
+    var sampleTopLabels = otuLabels.slice(0,noBarPlot).reverse(); 
+    var yticks = otuIds.slice(0,noBarPlot).map(id => "OTU " + id).reverse();
+    var yvals = Array.from({length:noBarPlot}, (v, i) => i);
+    // - Create bar chart trace
     var barData = [{
       x: sampleTopValues,
-      text: otuLabels.slice(0,10).reverse(),
+      text: sampleTopLabels,
       type: "bar"
     }];
-    // 9. Create the layout for the bar chart. 
+    // - Create bar chart layout 
     var barLayout = {
       title: "Top 10 Bacteria Cultures Found",
       yaxis: {
         tickmode: "array",
-        tickvals: [0,1,2,3,4,5,6,7,8,9],
+        tickvals: yvals,
         ticktext: yticks
       }
     };
-    // 10. Use Plotly to plot the data with the layout. 
+    // - Plot the bar chart 
     Plotly.newPlot("bar", barData, barLayout);
+
+    // D2. Create bubble chart
+    // - Create bubble chart trace
+    var bubbleData = [{
+      x: otuIds,
+      y: sampleValues,
+      text: otuLabels,
+      mode: 'markers',
+      marker: {
+        size: sampleValues,
+        color: otuIds,
+        colorscale: "Earth"
+      }
+    }];
+    // - Create bubble chart layout
+    var bubbleLayout = {
+      title: "Bacteria Cultures per Sample",
+      xaxis: {title: "OTU ID"}
+    };
+    // - Plot the bubble chart 
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
   });
 }
