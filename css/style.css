@@ -1,0 +1,23 @@
+@media (max-width: 480px) {
+  .jumbotron {
+    background-image: url("../images/bacteria_desktop.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: gainsboro;
+    text-shadow: 2px 2px black;
+    color: blue;
+  }
+}
+
+@media (min-width: 481px) {
+  .jumbotron {
+    background-image: url("../images/bacteria_desktop.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: gainsboro;
+    text-shadow: 2px 2px black;
+    color: white;
+  }
+}

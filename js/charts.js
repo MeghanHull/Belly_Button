@@ -110,10 +110,20 @@ function buildCharts(sampleID2) {
         tickmode: "array",
         tickvals: yvals,
         ticktext: yticks
-      }
+      },
+      annotations: [{
+        xref: 'paper',
+        yref: 'paper',
+        x: 0.5,
+        xanchor: 'center',
+        y: 0,
+        yanchor: 'center',
+        text: "The 10 most numerous bacterial species (OTUs) from the participant's belly button",
+        showarrow: false
+      }]
     };
     // - Plot the bar chart 
-    Plotly.newPlot("bar", barData, barLayout);
+    Plotly.newPlot("bar", barData, barLayout, {responsive: true});
 
     // D2. Create bubble chart
     // - Create bubble chart trace
@@ -166,18 +176,18 @@ function buildCharts(sampleID2) {
     // - Create gauge layout
     var gaugeLayout = { 
       autosize: true,
-      // annotations: [{
-      //   xref: 'paper',
-      //   yref: 'paper',
-      //   x: 0.5,
-      //   xanchor: 'center',
-      //   y: 0,
-      //   yanchor: 'center',
-      //   text: "The gauge displays your belly button weekly washing frequency",
-      //   showarrow: false
-      // }]
+      annotations: [{
+        xref: 'paper',
+        yref: 'paper',
+        x: 0.5,
+        xanchor: 'center',
+        y: 0,
+        yanchor: 'center',
+        text: "The gauge displays participant's belly button weekly washing frequency",
+        showarrow: false
+      }]
     };
     // - Plot gauge
-    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout, {responsive: true});
   });
 }
