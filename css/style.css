@@ -1,0 +1,49 @@
+@media (max-width: 480px) {
+  .jumbotron {
+    background-image: url("../images/bacteria_desktop.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: mediumaquamarine;
+    text-shadow: 2px 2px black;
+    color: white;
+  }
+  .jumbotron p {
+    color: white;
+    font-weight: bold;
+  } 
+}
+
+@media (min-width: 481px) {
+  .jumbotron {
+    background-image: url("../images/bacteria_desktop.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: mediumaquamarine;
+    text-shadow: 2px 2px black;
+    color: white;
+  }
+}
+.well {
+  background-color: mediumaquamarine;
+  color: white;
+}
+#selDataset {
+  color: black;
+}
+.panel-primary>.panel-heading-custom {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: MediumAquaMarine ;
+  border-color: MediumAquaMarine ;
+}
+#paraSummary {
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+}

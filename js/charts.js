@@ -93,6 +93,9 @@ function buildCharts(sampleID2) {
     // D1. Create bar chart
     // - Slice top 10 bacteria for bar chart
     var noBarPlot = 10
+    var totalValues = sampleValues.length;
+    if (totalValues < noBarPlot) { var noBarPlot = totalValues };
+    if (noBarPlot == 1) { var pluralText = ""} else {var pluralText = "s"};
     var sampleTopValues = sampleValues.slice(0,noBarPlot).reverse();
     var sampleTopLabels = otuLabels.slice(0,noBarPlot).reverse(); 
     var yticks = otuIds.slice(0,noBarPlot).map(id => "OTU " + id).reverse();
@@ -105,15 +108,27 @@ function buildCharts(sampleID2) {
     }];
     // - Create bar chart layout 
     var barLayout = {
-      title: "Top 10 Bacteria Cultures Found",
+      title: {
+        text:"<b>Top Bacteria Cultures Found</b><br>" + noBarPlot + " of " + totalValues + " culture" + pluralText
+      },
       yaxis: {
         tickmode: "array",
         tickvals: yvals,
         ticktext: yticks
-      }
+      },
+      annotations: [{
+        xref: 'paper',
+        yref: 'paper',
+        x: 0.5,
+        xanchor: 'center',
+        y: -0.25,
+        yanchor: 'center',
+        text: "The " + noBarPlot + " most numerous bacterial species (OTUs)<br>from the participant's belly button",
+        showarrow: false
+      }]
     };
     // - Plot the bar chart 
-    Plotly.newPlot("bar", barData, barLayout);
+    Plotly.newPlot("bar", barData, barLayout, {responsive: true});
 
     // D2. Create bubble chart
     // - Create bubble chart trace
@@ -130,7 +145,7 @@ function buildCharts(sampleID2) {
     }];
     // - Create bubble chart layout
     var bubbleLayout = {
-      title: "Bacteria Cultures per Sample",
+      title: "<b>Bacteria Cultures per Sample</b><br>"  + totalValues + " culture" + pluralText,
       xaxis: {title: "OTU ID"}
     };
     // - Plot the bubble chart 
@@ -145,7 +160,6 @@ function buildCharts(sampleID2) {
       type: "indicator",
       mode: "gauge+number",
       value: washFreq,
-      title: {text: "<b>Belly Button Washing Frequency</b><br>Scrubs per week"},
       gauge: {
         axis: {
           range: [null,10],
@@ -165,19 +179,20 @@ function buildCharts(sampleID2) {
     }];
     // - Create gauge layout
     var gaugeLayout = { 
-      autosize: true,
-      // annotations: [{
-      //   xref: 'paper',
-      //   yref: 'paper',
-      //   x: 0.5,
-      //   xanchor: 'center',
-      //   y: 0,
-      //   yanchor: 'center',
-      //   text: "The gauge displays your belly button weekly washing frequency",
-      //   showarrow: false
-      // }]
+      // autosize: true,
+      title: {text: "<b>Belly Button Washing Frequency</b><br>Scrubs per Week"},
+      annotations: [{
+        xref: 'paper',
+        yref: 'paper',
+        x: 0.5,
+        xanchor: 'center',
+        y: 0,
+        yanchor: 'center',
+        text: "The gauge displays participant's belly button weekly washing frequency",
+        showarrow: false
+      }]
     };
     // - Plot gauge
-    Plotly.newPlot("gauge", gaugeData, gaugeLayout);
+    Plotly.newPlot("gauge", gaugeData, gaugeLayout, {responsive: true});
   });
 }

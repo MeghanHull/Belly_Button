@@ -9,6 +9,8 @@
   <title>Bellybutton Biodiversity</title>
   <!-- CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -17,6 +19,11 @@
       <div class="col-md-12 jumbotron text-center">
         <h1>Belly Button Biodiversity Dashboard</h1>
         <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+      <div id="paraSummary">
+        <h3>Project Background</h3>
+        <p>Researchers with Improbable Beef are studying bacterial species that have the ability to synthesize proteins that taste like beef, particularly the bacteria found near a human belly button. A study was conducted collecting bacteria samples from the United States.</p>
+        <hr>
       </div>
     </div>
     <div class="row">
@@ -28,7 +35,7 @@
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
         <div class="panel panel-primary">
-          <div class="panel-heading">
+          <div class="panel-heading-custom">
             <h3 class="panel-title">Demographic Info</h3>
           </div>
           <!-- Dynamic Sample Metadata Panel -->
