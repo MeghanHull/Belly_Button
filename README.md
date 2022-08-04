@@ -59,3 +59,35 @@ The third deliverable was to create a gauge chart that displays the weekly washi
 </details>
 
 ## Deliverable 4: Customize the Dashboard
+The fourth deliverable was to the webpage for the dashboard.  The customizations implemented were:
+1. Add an image to the jumbotron.
+2. Add background color or a variety of compatible colors to the webpage.
+3. Add more information about the project as a paragraph on the page.
+4. Add information about what each graph visualizes, either under or next to each graph.
+5. Make the webpage mobile-responsive.
+
+<details><summary>View Customization #1 - Jumbotron Image</summary>
+  <p>
+  <img src="images/D4_1_Screenshot.png">
+  </p>
+</details>
+<details><summary>View Customization #2 - Updated Colors</summary>
+  <p>
+  <img src="images/D4_2_Screenshot.png">
+  </p>
+</details>
+<details><summary>View Customization #3 - Project Summary</summary>
+  <p>
+  <img src="images/D4_3_Screenshot.png">
+  </p>
+</details>
+<details><summary>View Customization #4 - Chart Info</summary>
+  <p>
+  <img src="images/D4_4_Screenshot.png">
+  </p>
+</details>
+<details><summary>View Customization #5 - Mobile Version</summary>
+  <p>
+  <img src="images/D4_Screenshot.png">
+  </p>
+</details>
