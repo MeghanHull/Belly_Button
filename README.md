@@ -88,6 +88,6 @@ The fourth deliverable was to the webpage for the dashboard.  The customizations
 </details>
 <details><summary>View Customization #5 - Mobile Version</summary>
   <p>
-  <img src="images/D4_Screenshot.png">
+  <img src="images/D4_5_Screenshot.png">
   </p>
 </details>
